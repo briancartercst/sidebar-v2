@@ -25,6 +25,7 @@
     "test": "gulp lint"
   },
   "devDependencies": {
+    "browser-sync": "^2.18.12",
     "gulp": "~3.8.7",
     "gulp-clean": "~0.3.1",
     "gulp-concat": "~2.3.4",

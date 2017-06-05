@@ -5,7 +5,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="../css/gmaps-sidebar.css" />
 
@@ -34,7 +34,6 @@
                 <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
                 <li><a href="#profile" role="tab"><i class="fa fa-user"></i></a></li>
                 <li class="disabled"><a href="#messages" role="tab"><i class="fa fa-envelope"></i></a></li>
-                <li><a href="https://github.com/Turbo87/sidebar-v2" role="tab" target="_blank"><i class="fa fa-github"></i></a></li>
             </ul>
 
             <ul role="tablist">
@@ -50,7 +49,7 @@
                     <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
                 </h1>
 
-                <p>A responsive sidebar for mapping libraries like <a href="http://leafletjs.com/">Leaflet</a> or <a href="http://openlayers.org/">OpenLayers</a>.</p>
+                <p>A responsive sidebar for putting home details.</p>
 
                 <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
 
@@ -77,22 +76,39 @@
 
     <div id="map" class="sidebar-map"></div>
 
-    <a href="https://github.com/Turbo87/sidebar-v2/"><img style="position: fixed; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
-
-    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="//maps.googleapis.com/maps/api/js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js" type="text/javascript"></script>
     <script src="../js/jquery-sidebar.js"></script>
 
     <script>
         function initialize() {
             var map = new google.maps.Map(document.getElementById("map"), {
-                center: new google.maps.LatLng(51.2, 7),
-                zoom: 5,
-                mapTypeId: google.maps.MapTypeId.TERRAIN,
+                center: new google.maps.LatLng(38.394620, -85.619857),
+                zoom: 17,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
             });
+
+            var myLatLng = {lat: 38.394620, lng: -85.619857};
+
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: "BC's Place!"
+                });
+
+            google.maps.event.addListener(marker,'click',function() {
+                $('#sidebar').toggleClass("collapsed");
+                $('sidebar-tabs').removeClass('active');
+                $('#home').addClass('active');    
+
+                map.setCenter(marker.getPosition());
+            });   
+
         }
 
         var sidebar = $('#sidebar').sidebar();
+
+
     </script>
 </body>
 </html>
